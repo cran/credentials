@@ -4,19 +4,28 @@
 \alias{set_github_pat}
 \title{Set your Github Personal Access Token}
 \usage{
-set_github_pat(force_new = FALSE, verbose = TRUE)
+set_github_pat(force_new = FALSE, validate = interactive(), verbose = validate)
 }
 \arguments{
-\item{force_new}{forget existing pat, always ask for new one}
+\item{force_new}{forget existing pat, always ask for new one.}
 
-\item{verbose}{print some debugging messages}
+\item{validate}{checks with the github API that this token works. Defaults to
+\code{TRUE} only in an interactive R session (not when running e.g. CMD check).}
+
+\item{verbose}{prints a message showing the credential helper and PAT owner.}
+}
+\value{
+Returns \code{TRUE} if a valid GITHUB_PAT was set, and FALSE if not.
 }
 \description{
 Populates the \code{GITHUB_PAT} environment variable using the \link[=http_credentials]{git_credential}
 manager, which \code{git} itself uses for storing passwords. The credential manager
-will automatically and securely prompt the user for credentials when needed.
+returns stored credentials if available, and securely prompt the user for
+credentials when needed.
 }
 \details{
-Use this function in your \link[=Startup]{.Rprofile} script to automatically set
-\code{GITHUB_PAT} for each R session without hardcoding your any secrets in plain text.
+Packages that require a \code{GITHUB_PAT} can call this function to automatically
+set the \code{GITHUB_PAT} when needed. Users may call this function in their
+\link[=Startup]{.Rprofile} script to automatically set \code{GITHUB_PAT} for each R
+session without hardcoding any tokens on disk in plain-text.
 }
