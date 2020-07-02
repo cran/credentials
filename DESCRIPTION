@@ -1,7 +1,7 @@
 Package: credentials
 Type: Package
 Title: Tools for Managing SSH and Git Credentials
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), 
     email = "jeroen@berkeley.edu", comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Setup and retrieve HTTPS and SSH credentials for use with 'git' and 
@@ -23,8 +23,8 @@ URL: https://docs.ropensci.org/credentials (website)
         https://github.com/r-lib/credentials
 BugReports: https://github.com/r-lib/credentials/issues
 NeedsCompilation: no
-Packaged: 2020-06-25 13:29:31 UTC; jeroen
+Packaged: 2020-07-01 22:37:25 UTC; jeroen
 Author: Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Repository: CRAN
-Date/Publication: 2020-06-25 14:30:07 UTC
+Date/Publication: 2020-07-02 05:10:03 UTC

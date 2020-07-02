@@ -1,7 +1,7 @@
-503fdd65ac6f3fd242527af91f73c555 *DESCRIPTION
+daa018cecc1ffbe4b35f5dd19035f0d1 *DESCRIPTION
 27b6128fe44dac890bf5c9dfce3a744c *LICENSE
 3f9a1504712d83a9346263ef9a199b3f *NAMESPACE
-57a3d5fff498d8e4388e8152abb9225d *NEWS
+e95cd4a79dfa5ec38183ab1e1f78c3cd *NEWS
 c98ed9fc412b8a0b960765cd74a7fb41 *R/credential-api.R
 16298fddb82887829393af2c2469d4b7 *R/credential-helpers.R
 6f93664c290a5a6844526c7fe7e99f6e *R/github-pat.R
@@ -10,7 +10,7 @@ c928b0f6fb79574cec5af42c164e9e98 *R/http-credential.R
 381c4a55e64d3134503e71cfe9d29aa9 *R/ssh-keys.R
 8a36afaad9c841b79ed6d81e7dc4f775 *build/vignette.rds
 80410b923c609a1212e5246e9ebd02a0 *inst/WORDLIST
-c8518f567d4a068020485cd13fcc3475 *inst/ask_token.sh
+44d47a9413de16adfb94b52cb91ab79b *inst/ask_token.sh
 54978db12c928358d0a208345a795a45 *inst/doc/intro.R
 9b5e69968573095bdfd37b48daba2c3a *inst/doc/intro.Rmd
 ff426d2a636526942b7844a0d086fb8b *inst/doc/intro.html
