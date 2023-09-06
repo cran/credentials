@@ -29,7 +29,7 @@ ssh_key_info <- function(host = NULL, auto_keygen = NA){
   keyfile <- find_ssh_key(host = host)
   if(is.null(keyfile)){
     if(isTRUE(auto_keygen) || (is.na(auto_keygen) && ask_user("No SSH key found. Generate one now?"))){
-      keyfile <- ssh_home('id_rsa')
+      keyfile <- ssh_home('id_ecdsa')
       ssh_keygen(keyfile)
     } else {
       stop(sprintf("Failed to find ssh key file for %s", host))
@@ -51,7 +51,7 @@ ssh_key_info <- function(host = NULL, auto_keygen = NA){
 #' @param file destination path of the private key. For the public key, `.pub`
 #' is appended to the filename.
 #' @importFrom openssl write_ssh write_pem read_key write_pkcs1 read_pubkey
-ssh_keygen <- function(file = ssh_home('id_rsa')){
+ssh_keygen <- function(file = ssh_home('id_ecdsa')){
   private_key <- normalizePath(file, mustWork = FALSE)
   pubkey_path <- paste0(private_key, ".pub")
   if(file.exists(private_key)){
@@ -63,7 +63,7 @@ ssh_keygen <- function(file = ssh_home('id_rsa')){
     }
   } else {
     cat(sprintf("Generating new RSA keyspair at: %s\n", private_key), file = stderr())
-    key <- openssl::rsa_keygen()
+    key <- openssl::ec_keygen("P-521")
     pubkey <- key$pubkey
     dir.create(dirname(private_key), showWarnings = FALSE)
     write_pkcs1(key, private_key)
@@ -139,7 +139,7 @@ find_ssh_key <- function(host = NULL){
     host <- "*"
   key_paths <- tryCatch(ssh_identityfiles(host = host), error = function(e){
     message(e$message)
-    file.path("~/.ssh", c("id_rsa", "id_dsa", "id_ecdsa", "id_ed25519", "id_xmss"))
+    file.path("~/.ssh", c("id_ecdsa", "id_ed25519", "id_rsa", "id_dsa", "id_xmss"))
   })
   key_paths <- normalize_home(key_paths)
   for(i in key_paths){
@@ -152,7 +152,9 @@ find_ssh_key <- function(host = NULL){
 ssh_identityfiles <- function(host){
   # Note there can be multiple 'identityfile' entries
   conf <- ssh_config(host = host)
-  unique(unlist(conf[names(conf) == 'identityfile']))
+  candidates <- unique(unlist(conf[names(conf) == 'identityfile']))
+  candidates <- Filter(function(x){!grepl('id_dsa', x)}, candidates)
+  sort(candidates) #prefer ecdsa, ed25519, rsa
 }
 
 # Old SSH versions (Trusty, CentOS) do not support ssh -G
